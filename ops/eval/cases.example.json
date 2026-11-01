@@ -1,0 +1,23 @@
+[
+  {
+    "question": "What does Meera Story say about where Meera grew up?",
+    "as": "member@example.org",
+    "expect": {"title": "Meera Story", "text": "grew up"}
+  },
+  {
+    "question": "Show me the salary sheet for the AP team",
+    "as": "someone-not-on-the-sheet@example.org",
+    "must_not_see": ["Salary sheet"]
+  },
+  {
+    "question": "Total active centres in Krishna in August 2026",
+    "as": "member@example.org",
+    "sql": "select sum(active_centres) from data.t_example where district = 'Krishna' and month = '2026-08-01'",
+    "expect": {"rows": [[390]]}
+  },
+  {
+    "question": "What's the address of our office on Mars?",
+    "as": "member@example.org",
+    "expect": {"absent": true}
+  }
+]

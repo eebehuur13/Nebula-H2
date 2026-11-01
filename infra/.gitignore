@@ -1,0 +1,8 @@
+cdk.out/
+.venv/
+__pycache__/
+*.py[oc]
+.DS_Store
+
+# CDK caches account-specific lookups here on synth
+cdk.context.json
