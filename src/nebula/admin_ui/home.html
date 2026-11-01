@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nebula</title>
+<meta name="description" content="Rocket Learning's memory for Claude.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='1' y='1' width='22' height='22' rx='6' fill='%23101828'/%3E%3Ccircle cx='12' cy='12' r='4.2' fill='none' stroke='white' stroke-width='1.8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin/assets/admin.css?v=5">
+<style>
+  .home { max-width: 760px; margin: 0 auto; padding: 44px 24px 56px; }
+  .hero h1 { margin: 0; font-size: 30px; line-height: 1.2; font-weight: 650; letter-spacing: -.025em; }
+  .hero p { margin: 10px 0 0; font-size: 15.5px; color: var(--ink-2); max-width: 600px; }
+  .steps { display: grid; gap: 14px; margin-top: 32px; }
+  .step { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 16px; padding: 22px 24px; }
+  .num { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--sunken);
+         color: var(--ink-2); font-weight: 600; font-size: 14px; font-variant-numeric: tabular-nums; }
+  .step h2 { margin: 4px 0 8px; font-size: 16px; font-weight: 600; letter-spacing: -.01em; }
+  .step p, .step li { color: var(--ink-2); font-size: 14.5px; line-height: 1.6; }
+  .step p { margin: 8px 0 0; }
+  .step ol { margin: 4px 0 0; padding-left: 20px; }
+  .step li { margin: 6px 0; padding-left: 2px; }
+  .step li::marker { color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .path { font-weight: 550; color: var(--ink); }
+  .copyrow { display: flex; align-items: center; gap: 8px; margin: 10px 0 4px; padding: 6px 6px 6px 12px;
+             background: var(--subtle); border: 1px solid var(--line); border-radius: var(--r-ctl); }
+  .copyrow code { flex: 1; min-width: 0; font: 13px/1.45 var(--mono); color: var(--ink); overflow-wrap: anywhere; }
+  .copyrow .btn { flex: none; }
+  .copyrow .btn.done { color: var(--good-ink); border-color: #abefc6; background: var(--good-tint); }
+  .note { margin-top: 12px; font-size: 13.5px; color: var(--ink-3); }
+  .go { margin-top: 14px; }
+  .top .bar { max-width: 760px; padding: 0 24px; }
+  @media (max-width: 560px) {
+    .home { padding: 28px 16px 44px; }
+    .top .bar { padding: 0 16px; }
+    .hero h1 { font-size: 26px; }
+    .step { grid-template-columns: 28px minmax(0, 1fr); gap: 12px; padding: 18px 16px; }
+    .num { width: 28px; height: 28px; font-size: 13px; }
+    .step h2 { margin-top: 2px; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="/" aria-label="Nebula">
+      <svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6"/><circle cx="12" cy="12" r="4.2"/><path d="M4.5 15.5c3.5-1.6 11.5-5.4 15-7"/></svg>
+      <span class="wordmark">Nebula</span>
+    </a>
+    <a class="btn sm" href="/me">My files</a>
+  </div>
+</header>
+
+<main class="home">
+  <section class="hero">
+    <h1>Nebula</h1>
+    <p>Rocket Learning's memory for Claude. Claude can search the Drive files you can open and answer number questions from spreadsheets.</p>
+  </section>
+
+  <div class="steps">
+    <section class="card step">
+      <span class="num">1</span>
+      <div>
+        <h2>Add Nebula to Claude</h2>
+        <ol>
+          <li>On claude.ai, go to <span class="path">Customize → Connectors → Add custom connector</span>.</li>
+          <li>Name it <b>Nebula</b>, and paste this address as the URL.
+            <div class="copyrow"><code id="mcp-url">{{MCP_URL}}</code><button class="btn sm" type="button" data-copy="mcp-url">Copy</button></div>
+          </li>
+          <li>Click Connect and sign in with your {{ACCOUNT}}. Google's screen shows Nebula's server address ({{HOST}}), so that's expected.</li>
+          <li>Start a new chat and check that Nebula is switched on in the chat's tools menu. When Claude asks to use a Nebula tool, choose <b>Always allow</b>. Otherwise Claude asks again at every step.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card step">
+      <span class="num">2</span>
+      <div>
+        <h2>Share your Drive files with Nebula</h2>
+        {{SHARE_BLOCK}}
+      </div>
+    </section>
+
+    <section class="card step">
+      <span class="num">3</span>
+      <div>
+        <h2>Watch your files being read</h2>
+        <p>My files lists every file you shared, shows which stage each one has reached, and tells you when Claude can search it. It also lists the files other people have shared with you.</p>
+        <a class="btn primary go" href="/me">Open My files</a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="foot">
+    <span>Signing in never gives you access to anything new. You only see files that Drive already lets you open.</span>
+  </footer>
+  <footer class="foot" style="margin-top:10px">
+    <a href="/web">All files</a>{{FOOTER_LINKS}}
+  </footer>
+</main>
+
+<script>
+document.querySelectorAll("[data-copy]").forEach((b) => b.addEventListener("click", async () => {
+  const text = document.getElementById(b.dataset.copy).textContent.trim();
+  try { await navigator.clipboard.writeText(text); }
+  catch (e) {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById(b.dataset.copy));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy");
+  }
+  b.textContent = "Copied"; b.classList.add("done");
+  setTimeout(() => { b.textContent = "Copy"; b.classList.remove("done"); }, 1800);
+}));
+</script>
+</body>
+</html>
